@@ -5,10 +5,6 @@
 #include <store/store-backend>
 #include <store/store-inventory>
 
-#define MAX_CATEGORIES	32
-#define MAX_ITEMS 		1024
-#define MAX_LOADOUTS	32
-
 enum Category
 {
 	CategoryId,
@@ -49,13 +45,13 @@ new Handle:g_reloadItemsPostForward;
 new Handle:g_hSQL;
 new g_reconnectCounter = 0;
 
-new g_categories[MAX_CATEGORIES][Category];
+new g_categories[STORE_MAX_CATEGORIES][Category];
 new g_categoryCount = -1;
 
-new g_items[MAX_ITEMS][Item];
+new g_items[STORE_MAX_ITEMS][Item];
 new g_itemCount = -1;
 
-new g_loadouts[MAX_LOADOUTS][Loadout];
+new g_loadouts[STORE_MAX_LOADOUTS][Loadout];
 new g_loadoutCount = -1;
 
 /**
@@ -591,7 +587,7 @@ WriteItemAttributes(const String:itemName[], const String:attrs[], Store_BuyItem
 	decl String:itemNameSafe[itemNameLength];
 	SQL_EscapeString(g_hSQL, itemName, itemNameSafe, itemNameLength);
 
-	new attrsLength = 10 * 1024;
+	new attrsLength = STORE_MAX_ATTRIBUTES_LENGTH;
 	decl String:attrsSafe[2*attrsLength+1];
 	SQL_EscapeString(g_hSQL, attrs, attrsSafe, 2*attrsLength+1);
 	
@@ -1823,7 +1819,7 @@ public Native_WriteItemAttributes(Handle:plugin, params)
 	decl String:itemName[STORE_MAX_NAME_LENGTH];
 	GetNativeString(1, itemName, sizeof(itemName));
 
-	new attrsLength = 10*1024;
+	new attrsLength = STORE_MAX_ATTRIBUTES_LENGTH;
 	GetNativeStringLength(2, attrsLength);
 
 	decl String:attrs[attrsLength];

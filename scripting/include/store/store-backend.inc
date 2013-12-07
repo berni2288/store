@@ -13,7 +13,11 @@
 #define STORE_MAX_LOADOUTGAME_LENGTH	32
 #define STORE_MAX_LOADOUTCLASS_LENGTH	32
 
-#define STORE_MAX_ATTRIBUTES_LENGTH		10*1024
+#define STORE_MAX_ATTRIBUTES_LENGTH		20480
+
+#define STORE_MAX_CATEGORIES  32
+#define STORE_MAX_ITEMS       4096
+#define STORE_MAX_LOADOUTS    32
 
 functag Store_GetItemsCallback public(items[], count, any:data);
 functag Store_GetUserItemsCallback public(useritems[], bool:equipped[], useritemCount[], count, loadoutId, any:data);
